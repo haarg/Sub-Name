@@ -42,17 +42,4 @@ env:
     - AUTOMATED_TESTING=1
     - RELEASE_TESTING=0
 before_install:
-  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
-  - source ~/travis-perl-helpers/init
-  - if [ -z "$PERLBREW_PERL" ]; then eval $(curl https://travis-perl.github.io/init) --auto; fi
-  - build-perl
-  - perl -V
-  - build-dist
-  - cd $BUILD_DIR
-install:
-  - perl -M5.014 -e1 2>/dev/null || cpan-install Dist::Zilla@5.047
-  - cpan-install --deps
-script:
-  - perl Makefile.PL
-  - make
-  - prove -b -r -s -j$(test-jobs) $(test-files)
+  - eval $(curl https://travis-perl.github.io/init) --auto
